@@ -9,7 +9,7 @@ package laboratorio1;
 import java.util.*;
 
 public class Laboratory4 {
-    // Computes the sum of an array recursively
+    /
 
     public static int ArraySum(int[] nums, int n) {
         if (n == 0) {
