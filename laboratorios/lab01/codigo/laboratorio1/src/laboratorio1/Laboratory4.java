@@ -9,7 +9,14 @@ package laboratorio1;
 import java.util.*;
 
 public class Laboratory4 {
-    /
+    /**
+    *Este algoritmo suma todos todos los valores contenidos en un arreglo
+    * @param nums Este es el arreglo que se utilizará como prueba para
+    * la ejecucion de el algoritmo
+    * @param n Es un entero que indica la ultima posicion de el arreglo
+    * @return Retorna un entero
+    */
+    
 
     public static int ArraySum(int[] nums, int n) {
         if (n == 0) {
@@ -17,8 +24,14 @@ public class Laboratory4 {
         }
         return nums[n] + ArraySum(nums, n - 1);
     }
-
-    // Computes the maximum value of an array recursively
+   /**
+    *Este algoritmo calcula el valor maximo de un arreglo de enteros
+    * @param A Este es el arreglo que se utilizará como prueba para
+    * la ejecucion de el algoritmo
+    * @param n Es un entero que indica la ultima posicion de el arreglo
+    * @return Retorna un entero
+    */
+    
     public static int ArrayMax(int[] A, int n) {
 
         if (n == 0) {
@@ -26,8 +39,12 @@ public class Laboratory4 {
         }
         return Math.max(A[n], ArrayMax(A, n - 1));
     }
-
-    // Computes Fibonnacci series recursively
+    /**
+    *Este algoritmo calcula el valor fibonacci de un entero dado
+    * @param n Es un entero que indica el valor de fibonacci a calcular
+    * @return Retorna un entero
+    */
+    
     public static int Fibonnacci(int n) {
         if (n == 0 || n == 1) {
             return n;
