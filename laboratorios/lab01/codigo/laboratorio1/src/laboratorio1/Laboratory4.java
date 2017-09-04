@@ -52,8 +52,9 @@ public class Laboratory4 {
         return Fibonnacci(n - 1) + Fibonnacci(n - 2);
     }
   /**
-    Este algoritmo genera un arreglo de tamaño n 
-  */
+   *Este algoritmo genera un arreglo de tamaño n 
+   *@return retorna el arreglo
+   */
     public static int[] generarArregloDeTamanoN(int n) {
         int max = 5000;
         int[] array = new int[n];
@@ -92,7 +93,9 @@ public class Laboratory4 {
         long tiempo = System.currentTimeMillis() - start;
         System.out.println("Para fibonachi demora: " + tiempo);
     }
-
+    /**
+    *este es el metodo Main donde se ejecutaran los metodos anteriormente descritos
+    */
     public static void main(String[] args) {
         int n = 10000000;
 
