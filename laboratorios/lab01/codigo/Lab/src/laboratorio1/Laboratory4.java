@@ -4,6 +4,9 @@ package laboratorio1;
  * Laboratorio 4 de Estructuras de Datos 1
  *
  * @author Mauricio Toro
+ * Luis Javier Palacio
+ * Santiago Castrillon
+ * Kevyn Santiago Gomez
  * @version 1
  */
 import java.util.*;
