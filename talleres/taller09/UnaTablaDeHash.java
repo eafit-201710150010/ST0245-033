@@ -22,7 +22,7 @@ public class UnaTablaDeHash {
     private int funcionHash(String k) {
         int sumatoria = 0;
         for (int i = 0; i < k.length(); i++) {
-            sumatoria += (int) k.charAt(i) * Math.pow(2, 31 - i);
+            sumatoria += k.charAt(i);
         }
         return sumatoria % size;
     }
@@ -43,7 +43,6 @@ public class UnaTablaDeHash {
     // Ojo con las colisiones
     public void put(String k, int v) {
         int pos = funcionHash(k);
-        System.out.println(pos);
         tabla.get(pos).addFirst(new Pareja(k, v));
     }
 }

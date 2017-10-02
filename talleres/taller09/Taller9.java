@@ -11,6 +11,7 @@ public class Taller9 {
     //pedrito 1
     public static void agregar(HashMap empresas, String key, String value) {
         empresas.put(key, value);
+        empresas.put(value, key);
     }
 
     //pedrito 2
@@ -41,14 +42,26 @@ public class Taller9 {
         } else {
             System.out.println("No esta agregado esa empresa");
         }
-        
+        //4 punto
+        if (contienekey(empresas, "Estados Unidos")) {
+            System.out.println("Hay empresas de Estados Unidos");
+        } else {
+            System.out.println("No hay empresas de Estados Unidos");
+        }
+        if (contienekey(empresas, "India")) {
+            System.out.println("Hay empresas de Estados Unidos");
+        } else {
+            System.out.println("No hay empresas de la India");
+        }
+
         //Telefonos
         UnaTablaDeHash tabla = new UnaTablaDeHash();
         tabla.put("Robledo", 3319084);
         tabla.put("Luis Felipe", 5586978);
         tabla.put("Fajardo", 6689085);
         tabla.put("Fernando", 0);
-        System.out.println(tabla.get("Fajardo"));
+        tabla.put("Farbicio", 508975);
+        System.out.println(tabla.get("Farbicio"));
     }
 
 }
