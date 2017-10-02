@@ -49,8 +49,17 @@ public class SistemaArchivos {
     }
 
     /**
-     *
-     * @return
+     * Este metodo permite leer un archivo txt que tenga formato de directorios
+     * y luego hacer búsquedas sobre éste.
+     *  El formato de archivo es: 
+     * nombreprincipal/
+     * ── 4.0K /DataSets
+     * ── ── 252K treeEtc.txt
+     * Las barras indican el nivel del directorio, luego se ingresa el tamaño.Después si es un directorio un 
+     * "/" y el nombre del directorio. Si es un archivo no se le pone nada.
+
+
+     * @return Un String vacio si todo salio bien, de lo contrario un mensaje de error.
      */
     public static String leerArchivo() {
         Carpeta padre = null, actual = null;
@@ -95,7 +104,7 @@ public class SistemaArchivos {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("No se ha encontrado el archivo Carpetas.txt en el directorio del programa");
+            return "No se ha encontrado el archivo Carpetas.txt en el directorio del programa";
         }
 
         return "";

@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- *
- * @author ljpalaciom
- */
-/**
  * Clase por implementar
  * @author ljpalaciom
  */

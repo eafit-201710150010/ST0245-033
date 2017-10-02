@@ -3,21 +3,42 @@ package sistemaarchivos;
 import java.util.LinkedList;
 
 /**
- *
+ * Esta clase es una plantilla para objetos tipo carpeta y/o archivo. Se ayuda de la enumeracion TipoCarpeta
+ * @see TipoCarpeta
  * @author ljpalaciom
  */
 public class Carpeta {
-
+    /**
+     * Esta es la ruta donde está la carpeta o archivo. Tiene el siguiente orden [rutaHija,rutaPadre]
+     */
     private LinkedList<String> direccion;
+    /**
+     * El nombre del dato tipo carpeta o archivo
+     */
     private String nombre;
+    /**
+     * El tamano dado en un string donde los primeros digitos son numeros y el ultimo digito las 
+     * unidades de medida
+     */
     private String tamano;
+    /**
+     * Gracias a la enumeracion el la carpeta puede ser de dos tipos, carpeta o archivo. Si es carpeta tiene
+     * hijos, si es un archivo no.
+     * @see TipoCarpeta 
+     */
     private TipoCarpeta tipo;
+    /**
+     * Son los hijos de la carpeta. En caso tal de ser un archivo, esta variable no se inicializa.
+     */
     private LinkedList<Carpeta> contenido;
+    /**
+     * Cada carpeta y/o archivo sabe quien es su padre. Esto para ayudar el metodo actualizarDireccion
+     */
     private Carpeta padre;
 
     /**
-     * Este es el constructor de la clase.
-     * Se encarga de
+     * Este es el constructor de la clase. 
+     * Usa el metodo actualizarDireccion
      * @param padre
      * @param nombre
      * @param tamano
@@ -39,13 +60,16 @@ public class Carpeta {
     }
 
     /**
-     *
+     * Este metodo permite añadir una carpeta a LinkedList de Contenidos
      * @param carpeta
      */
     public void add(Carpeta carpeta) {
         contenido.add(carpeta);
     }
-
+    /**
+     * Este metodo se usa para construir la ruta de un archivo por primera vez.
+     * En el futuro se piensa usar toda la ruta que tiene el padre para optimizar el metodo
+     */
     private void actualizarDireccion() {
         Carpeta actual = this;
         while (actual != null) {
@@ -119,7 +143,7 @@ public class Carpeta {
     }
 
     /**
-     *
+     * Este metodo lista todos los contenidos de una carpeta.
      * @return
      */
     public LinkedList<String> listarContenido() {
