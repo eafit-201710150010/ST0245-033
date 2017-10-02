@@ -12,8 +12,9 @@ public class UnaTablaDeHash {
 
     public UnaTablaDeHash() {
         tabla = new ArrayList<>(size);
-        for (LinkedList<Pareja> linkedList : tabla) {
-            linkedList = new LinkedList<>();
+        for (int i = 0; i < size; i++) {
+            LinkedList linkedList = new LinkedList<>();
+            tabla.add(linkedList);
         }
     }
 
@@ -42,11 +43,7 @@ public class UnaTablaDeHash {
     // Ojo con las colisiones
     public void put(String k, int v) {
         int pos = funcionHash(k);
-        LinkedList<Pareja> enPos = tabla.get(pos);
-        if (enPos == null) {
-            enPos = new LinkedList<>();
-        } 
-        Pareja pareja = new Pareja(k, v);
-        enPos.addFirst(pareja);
+        System.out.println(pos);
+        tabla.get(pos).addFirst(new Pareja(k, v));
     }
 }
