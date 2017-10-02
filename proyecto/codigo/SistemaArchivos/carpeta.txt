@@ -1,0 +1,22 @@
+Proyecto/
+── 4.0K /DataSets
+── ── 252K treeEtc.txt
+── 4.0K /Plantillas
+── ── 463K ED1-Guia-Proyecto-Entrega.doc
+── ── 1.5M ED1-Plantilla-Eafit.pptx
+── ── 255K ejemplo-de-un-reporte-con-plantilla-ACM.pdf
+── ── 1.1M plantilla-ACM-en-Latex.zip
+── ── 1.2M plantilla-ACM-en-Word.doc
+── ── 4.0K /SIG Proceedings Template-Jan2015 Zip
+── ── ── 9.4K acmcopyright.sty
+── ── ── 144K acm-update.pdf
+── ── ── 336K flies.eps
+── ── ── 151K fly.eps
+── ── ── 3.4K rosette.eps
+── ── ── 65K sig-alternate-05-2015.cls
+── ── ── 124K sig-alternate-guide.docx
+── ── ── 572K sig-alternate-guide.pdf
+── ── ── 255K sig-alternate-sample.pdf
+── ── ── 26K sig-alternate-sample.tex
+── ── ── 1.5K sigproc.bib
+── 571K Proyecto Final ED1 Sistema-directorios Vr 2.0.pdf
