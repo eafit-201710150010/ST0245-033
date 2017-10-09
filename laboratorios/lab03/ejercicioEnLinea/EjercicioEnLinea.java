@@ -5,9 +5,9 @@ import java.util.*;
 public class EjercicioEnLinea {
 
     /**
-     * Este metodo mejora la legilibilidad del codigo e imprime la respuesta en O(n)
+     * Este metodo mejora la legilibilidad del codigo e imprime la respuesta en
+     * O(n)
      */
-   
     public static void linea() {
         LinkedList<Character> list = new LinkedList<>();
         Scanner sc = new Scanner(System.in);
@@ -18,6 +18,7 @@ public class EjercicioEnLinea {
             switch (str.charAt(i)) {
                 case '[':
                     inicio = true;
+                    index = 0;
                     break;
                 case ']':
                     inicio = false;
@@ -28,18 +29,16 @@ public class EjercicioEnLinea {
                         list.add(str.charAt(i));
                     } else {
                         list.add(index++, str.charAt(i));
-                    }   break;
+                    }
+                    break;
             }
         }
-
         while (!list.isEmpty()) {
             System.out.print(list.remove());
         }
-
     }
 
     public static void main(String[] args) {
-        System.out.println("Ingrese una linea");
         linea();
     }
 
