@@ -70,7 +70,6 @@ public class Laboratory2 {
      * @param solicitudes
      */
     public static void ejercicio4(List neveras, List<Solicitud> solicitudes) {
-
         for (int i = solicitudes.size() - 1; i >= 0; i--) {
             Solicitud soli = solicitudes.get(i);
             while (soli.getCantidad() > 0 && neveras.size() > 0) {
@@ -80,7 +79,6 @@ public class Laboratory2 {
                 neveras.remove(last);
             }
         }
-
     }
 
     /**

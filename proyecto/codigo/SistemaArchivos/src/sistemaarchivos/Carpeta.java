@@ -67,13 +67,12 @@ public class Carpeta {
         contenido.add(carpeta);
     }
     /**
-     * Este metodo se usa para construir la ruta de un archivo por primera vez.
-     * En el futuro se piensa usar toda la ruta que tiene el padre para optimizar el metodo
+     * Este metodo se usa para construir la ruta de un archivoz.   * 
      */
     private void actualizarDireccion() {
         Carpeta actual = this;
         while (actual != null) {
-            direccion.add(actual.nombre);
+            direccion.addFirst(actual.nombre);
             actual = actual.padre;
         }
     }
@@ -143,7 +142,7 @@ public class Carpeta {
     }
 
     /**
-     * Este metodo lista todos los contenidos de una carpeta.
+     * Este metodo lista todos los contenidos de una sóla carpeta.
      * @return
      */
     public LinkedList<String> listarContenido() {
