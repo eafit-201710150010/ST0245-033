@@ -31,20 +31,29 @@ public class Taller11 {
         //Crea el árbol familiar
         BinaryTree tree = new BinaryTree();
         // ...
-        tree.insertar(5);
-        tree.insertar(3);
-        tree.insertar(7);
+        tree.insertar(10);
         tree.insertar(6);
-        tree.insertar(8);
-        tree.insertar(9);
-        
+        tree.insertar(7);
+        tree.insertar(5);
+        tree.insertar(4);
+        tree.insertar(20);
+        tree.insertar(19);
+        tree.insertar(30);
+        tree.insertar(35);
+        tree.insertar(28);
+        tree.insertar(27);
+        tree.insertar(29);
+        tree.insertar(26);
+        tree.insertar(25);
+        //tree.borrar(10);
+        tree.borrar(6);
+        tree.borrar(20);
+
         //Imprime el árbol familiar
         tree.recursivePrint();
 
         //Dibuja el árbol familiar
         dibujarArbol(tree);
-        //Ayuda con proyecto
-        //HashMap<String,LinkedList<Carpeta>> hola = new HashMap();
 
     }
 }
