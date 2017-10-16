@@ -58,17 +58,18 @@ public class ColeccionCarpetas {
         return (LinkedList<Carpeta>) tabla.get(clave);
     }
 
-     /**
+    /**
      * Este metodo está hecho para retornar todos las rutas de una lista de
      * carpetas
+     *
      * @param coincidencias La lista de coincidencias que se analizará
      * @return Este metodo retorna una lista enlazada de listas de cadenas de
      * caracteres.
      */
-    public LinkedList<LinkedList<String>> direcciones (LinkedList<Carpeta> coincidencias) {
+    public LinkedList<LinkedList<String>> direcciones(LinkedList<Carpeta> coincidencias) {
         LinkedList<LinkedList<String>> retornar = new LinkedList<>();
         for (Carpeta carpeta : coincidencias) {
-            retornar.add(carpeta.getDireccion()); 
+            retornar.add(carpeta.getDireccion());
         }
         return retornar;
     }
@@ -76,18 +77,32 @@ public class ColeccionCarpetas {
     /**
      * Este metodo está hecho para retornar todos los contenidos de una lista de
      * carpetas
+     *
      * @param coincidencias
      * @return Este metodo retorna una lista enlazada de listas de cadenas de
      * caracteres.
      */
     public LinkedList<LinkedList<String>> contenidos(LinkedList<Carpeta> coincidencias) {
         LinkedList<LinkedList<String>> retornar = new LinkedList<>();
-        for (Carpeta carpeta : coincidencias) {
-            if (carpeta.getTipo() == TipoCarpeta.Carpeta) {
-                retornar.add(carpeta.listarContenido());
+        if (coincidencias != null) {
+            for (Carpeta carpeta : coincidencias) {
+                if (carpeta.getTipo() == TipoCarpeta.Carpeta) {
+                    retornar.add(carpeta.listarContenido());
+                }
             }
         }
         return retornar;
+    }
+
+    /**
+     * Usa el metodo toString de la clase Carpeta con una lista de carpetas
+     *
+     * @param coincidencias
+     */
+    public void imprimirCarpetas(LinkedList<Carpeta> coincidencias) {
+        for (Carpeta coincidencia : coincidencias) {
+            System.out.println(coincidencia);
+        }
     }
 
 }

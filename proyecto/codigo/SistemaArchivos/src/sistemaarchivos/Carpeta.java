@@ -123,6 +123,7 @@ public class Carpeta {
      */
     public void setTipo(TipoCarpeta tipo) {
         this.tipo = tipo;
+        contenido = new LinkedList<>();
     }
 
     /**
