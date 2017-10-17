@@ -5,8 +5,10 @@
  */
 package sistemaarchivos;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
 
 /**
  * Esta clase contiene la tabla de hash que permite la eficiencia de las
@@ -15,19 +17,15 @@ import java.util.LinkedList;
  * @author ljpalaciom
  */
 public class ColeccionCarpetas {
-
+    
     private HashMap tabla;
-    private String nombreTabla;
 
     /**
      * Este es el constructor que inicializa el HashMap.
      *
-     * @param nombreTabla En el archivo txt se recibe un nombre inicial, este se
-     * ingresa aqui como el nombre de la tabla.
      */
-    public ColeccionCarpetas(String nombreTabla) {
+    public ColeccionCarpetas() {
         tabla = new HashMap<>();
-        this.nombreTabla = nombreTabla;
     }
 
     /**
@@ -55,7 +53,39 @@ public class ColeccionCarpetas {
      * @return Una LinkedList con todos las carpetas de coincidan con la clave
      */
     public LinkedList<Carpeta> get(String clave) {
-        return (LinkedList<Carpeta>) tabla.get(clave);
+        LinkedList<Carpeta> retornar = (LinkedList<Carpeta>) tabla.get(clave);
+        if (retornar == null) {
+            System.out.println("No such file or directory");
+        }
+        return retornar;
+    }
+
+    /**
+     * Este metodo permite una carpeta usando el parametro direccion. Retorna
+     * null si no lo encuentra.
+     *
+     * @param clave
+     * @param direccion La direccion del archivo
+     * @return
+     */
+    public Carpeta get(String clave, String direccion) {
+        String div[] = direccion.split("/");
+
+        LinkedList<Carpeta> retornar = (LinkedList<Carpeta>) tabla.get(clave);
+        LinkedList<String> dir = new LinkedList<>();
+        for (int i = 0; i < div.length; i++) {
+            dir.add(div[i]);
+        }
+        if (retornar == null) {
+            System.out.println("No such file or directory");
+        }
+        for (Carpeta carpeta : retornar) {
+            System.out.println(carpeta.getDireccion());
+            if (carpeta.getDireccion().hashCode() == dir.hashCode()) {
+                return carpeta;
+            }
+        }
+        return null;
     }
 
     /**
@@ -95,6 +125,48 @@ public class ColeccionCarpetas {
     }
 
     /**
+     * Este metodo está hecho para retornar los contenidos de un tamaño mayor al
+     * ingresado por parámetro de una lista de carpetas
+     *
+     * @param coincidencias
+     * @param TamanoMayor
+     * @return Este metodo retorna una lista enlazada de listas de cadenas de
+     * caracteres.
+     */
+    public LinkedList<LinkedList<String>> contenidosMayor(LinkedList<Carpeta> coincidencias, String TamanoMayor) {
+        LinkedList<LinkedList<String>> retornar = new LinkedList<>();
+        if (coincidencias != null) {
+            for (Carpeta carpeta : coincidencias) {
+                if (carpeta.getTipo() == TipoCarpeta.Carpeta) {
+                    retornar.add(carpeta.listarContenidoMayor(TamanoMayor));
+                }
+            }
+        }
+        return retornar;
+    }
+
+    /**
+     * Este metodo está hecho para retornar los contenidos de un usuario
+     * ingresado por parámetro de una lista de carpetas
+     *
+     * @param coincidencias Una lista enlazada de carpetas
+     * @param Usuario El dueño del directorio a buscar
+     * @return Este metodo retorna una lista enlazada de listas de cadenas de
+     * caracteres.
+     */
+    public LinkedList<LinkedList<String>> contenidosUsuario(LinkedList<Carpeta> coincidencias, String Usuario) {
+        LinkedList<LinkedList<String>> retornar = new LinkedList<>();
+        if (coincidencias != null) {
+            for (Carpeta carpeta : coincidencias) {
+                if (carpeta.getTipo() == TipoCarpeta.Carpeta) {
+                    retornar.add(carpeta.listarContenidoUsuario(Usuario));
+                }
+            }
+        }
+        return retornar;
+    }
+
+    /**
      * Usa el metodo toString de la clase Carpeta con una lista de carpetas
      *
      * @param coincidencias
@@ -104,5 +176,5 @@ public class ColeccionCarpetas {
             System.out.println(coincidencia);
         }
     }
-
+    
 }

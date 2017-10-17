@@ -27,7 +27,7 @@ public class SistemaArchivos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        leerArchivo2();
+        leerArchivo("treeEtc.txt");
 
         //Probando listar contenido de una carpeta
         LinkedList<Carpeta> coincidencias = tabla.get("bm");
@@ -42,114 +42,74 @@ public class SistemaArchivos {
         //Probando los atributos
         System.out.println("El metodo toString probado: ");
         tabla.imprimirCarpetas(coincidencias);
+       
+        System.out.println();
+        leerArchivo("ejemplito.txt");
+        coincidencias = tabla.get("DataSets");
+        System.out.println("El contenido de las coincidencias DataSets:");
+        System.out.println(tabla.contenidos(coincidencias));
+        coincidencias = tabla.get("Plantillas");
+        System.out.println("El contenido de las coincidencias de Plantillas con tamaño mayor a 1M:");
+        System.out.println(tabla.contenidosMayor(coincidencias, "1M"));
+        System.out.println("directorios que se encuentran en “Plantillas” cuyo dueño sea el usuario root");
+        System.out.println(tabla.contenidosUsuario(coincidencias, "root"));
+        
+        coincidencias = tabla.get("Datos3");
+
     }
 
     /**
-     * Este metodo permite leer un archivo txt que tenga formato de directorios
-     * y luego hacer búsquedas sobre éste. El formato de archivo es:
-     * nombreprincipal/ ── 4.0K /DataSets ── ── 252K treeEtc.txt Las barras
-     * indican el nivel del directorio, luego se ingresa el tamaño.Después si es
-     * un directorio un "/" y el nombre del directorio. Si es un archivo no se
-     * le pone nada.
-     *
-     *
+     * Este metodo permite leer un archivo txt y luego hacer búsquedas sobre
+     * éste. La primera linea es el directorio raiz etc/, no será tomado en
+     * cuenta en las direcciones. El numero de caracteres hasta '[' permitiran
+     * conocer la profundidad del archivo que se lee. 
+     * Se incluye un archivo con el formato que acepta este metodo.
+     * @param nombreArchivo Nombre de archivo a leer
+     * 
      * @return Un String vacio si todo salio bien, de lo contrario un mensaje de
      * error.
      */
-    public static String leerArchivo() {
-        Carpeta padre = null, actual = null;
-        int nivel = 1;
+    public static String leerArchivo(String nombreArchivo) {
         try {
-            Scanner archivo = new Scanner(new File("carpeta.txt"));
-            Scanner leerLinea;
-            if (archivo.hasNextLine()) {
-                leerLinea = new Scanner(archivo.nextLine());
-                leerLinea.useDelimiter("/");
-                String nombreRaiz = leerLinea.next();
-                tabla = new ColeccionCarpetas(nombreRaiz);
-
-                while (archivo.hasNextLine()) {
-                    leerLinea = new Scanner(archivo.nextLine());
-                    leerLinea.useDelimiter(" ");
-
-                    String dato = leerLinea.next();
-                    int numNivel = 0;
-                    while (dato.equals("──")) {
-                        dato = leerLinea.next();
-                        numNivel++;
-                    }
-
-                    String tamano = dato;
-                    leerLinea.useDelimiter("\n");
-                    String aux = leerLinea.next();
-                    String nombre = aux.substring(1);
-                    if (numNivel > nivel) {
-                        padre = actual;
-                        nivel++;
-                    } else if (numNivel < nivel) {
-                        nivel--;
-                        padre = padre.getPadre();
-                    }
-                    if (nombre.charAt(0) == '/') {
-                        actual = new Carpeta(padre, nombre, tamano, TipoCarpeta.Carpeta);
-                    } else {
-                        actual = new Carpeta(padre, nombre, tamano, TipoCarpeta.Archivo);
-                    }
-                    tabla.put(nombre, actual);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            return "No se ha encontrado el archivo Carpetas.txt en el directorio del programa";
-        }
-
-        return "";
-    }
-
-    /**
-     * Sin revisar
-     *
-     * @return
-     */
-    public static String leerArchivo2() {
-        try {
-            BufferedReader archivo = new BufferedReader(new FileReader("treeEtc.txt"));
+            BufferedReader archivo = new BufferedReader(new FileReader(nombreArchivo));
             String nombreRaiz = archivo.readLine();
-            tabla = new ColeccionCarpetas(nombreRaiz);
-
+            tabla = new ColeccionCarpetas();
             String linea;
-            int nivel = 1;
-            Carpeta padre = null, ultimoAgregado = null;
+            int nivel = 4;
+            Carpeta padre = new Carpeta(null, "", nombreRaiz, "", TipoCarpeta.Carpeta);
+            tabla.put(nombreRaiz, padre);
+            Carpeta ultimoAgregado = null;
             while ((linea = archivo.readLine()) != null) {
                 Scanner leerLinea = new Scanner(linea);
                 if (leerLinea.hasNext()) {
+                    leerLinea.useDelimiter("[a-z]");
                     String actual = leerLinea.next();
-                    int numNivel = 1;
-                    while (actual.startsWith("│")) {
-                        numNivel++;
-                        actual = leerLinea.next();
-                    }
+
+                    int numNivel = actual.length() - 1;
                     if (numNivel > nivel) {
+                        ultimoAgregado.cambiarACarpeta();
                         padre = ultimoAgregado;
-                        ultimoAgregado.setTipo(TipoCarpeta.Carpeta);
-                        nivel++;
+                        nivel += 4;
                     } else if (numNivel < nivel) {
                         padre = padre.getPadre();
-                        nivel--;
+                        nivel -= 4;
                     }
-                    //Esto porque todas las lineas tienen antes de los corchetes un |--[root
-                    actual = leerLinea.next();
+                    leerLinea.reset();
+                    String usuario = leerLinea.next();
                     StringBuilder tamano = new StringBuilder(leerLinea.next());
-                    //Para eliminar el ]
-                    tamano.deleteCharAt(tamano.length() - 1);
+                    tamano.deleteCharAt(tamano.length() - 1); //Para eliminar el ]
+                    leerLinea.useDelimiter("  ");
                     String nombre = leerLinea.next();
-                    ultimoAgregado = new Carpeta(padre, nombre, tamano.toString(), TipoCarpeta.Archivo);
-                    tabla.put(nombre, ultimoAgregado);;
+                    ultimoAgregado = new Carpeta(padre, usuario, nombre, tamano.toString(), TipoCarpeta.Archivo);
+                    tabla.put(nombre, ultimoAgregado);
                 } else {
+                    archivo.close();
+                    leerLinea.close();
                     break;
                 }
             }
         } catch (IOException ex) {
-
+            return "No se ha encontrado el archivo treeEtc.txt en el directorio del programa o el archivo esta corrupto";
         }
         return "";
     }
