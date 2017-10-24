@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sistemaarchivos;
 
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
@@ -31,7 +26,7 @@ public class ColeccionCarpetas {
     /**
      * Este metodo permite ingresar un nuevo dato a la tabla de hash.
      *
-     * @param clave Esta es la que se asocia con un valor de tipo carpeta o
+     * @param clave Esta es el nombre que se asocia con un valor de tipo carpeta o
      * archivo, asi cuando se busque la clave se obtiene este valor rapidamente.
      * @param carpeta
      */
@@ -80,7 +75,6 @@ public class ColeccionCarpetas {
             System.out.println("No such file or directory");
         }
         for (Carpeta carpeta : retornar) {
-            System.out.println(carpeta.getDireccion());
             if (carpeta.getDireccion().hashCode() == dir.hashCode()) {
                 return carpeta;
             }

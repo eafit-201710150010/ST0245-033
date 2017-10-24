@@ -16,6 +16,7 @@ public class Carpeta {
      * [...,rutaAbuelo,rutaPadre,rutaActual]
      */
     private LinkedList<String> direccion;
+
     /**
      * El nombre del dato tipo carpeta o archivo
      */
@@ -204,10 +205,12 @@ public class Carpeta {
         }
         return hijos;
     }
+
     /**
      * Este metodo permite listar contenidos por Usuario
+     *
      * @param usuario El dueño del directorio a buscar
-     * @return 
+     * @return
      */
     public LinkedList<String> listarContenidoUsuario(String usuario) {
         LinkedList<String> hijos = new LinkedList();
@@ -219,16 +222,16 @@ public class Carpeta {
         return hijos;
     }
 
-/**
- *
- * @return Directorio padre
- */
-public Carpeta getPadre() {
+    /**
+     *
+     * @return Directorio padre
+     */
+    public Carpeta getPadre() {
         return padre;
     }
 
     @Override
-        public String toString() {
+    public String toString() {
         return "Carpeta{" + "direccion=" + direccion + ", nombre=" + nombre + ", usuario=" + usuario + ", tamano=" + tamano + ", tipo=" + tipo + '}';
     }
 

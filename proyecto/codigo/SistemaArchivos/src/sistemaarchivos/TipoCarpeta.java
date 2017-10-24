@@ -12,12 +12,12 @@ package sistemaarchivos;
 public enum TipoCarpeta {
 
     /**
-     * Es un carpeta si tiene Carpetas dentro de sí
+     * Es un carpeta si puede tener Carpetas dentro de sí
      */
     Carpeta,
 
     /**
-     * Es un archivo si no tiene Carpetas dentro de sí
+     * Es un archivo si no puede tener Carpetas dentro de sí
      */
     Archivo;
 }

@@ -6,6 +6,7 @@
 package sistemaarchivos;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -210,6 +211,22 @@ public class ColeccionCarpetasTest {
         
         Carpeta expResult = padre1;
         Carpeta result = instance.get(clave, direccion);
+        assertEquals(expResult, result);
+    }
+     @Test
+    public void peorDeLosCasos() {
+        System.out.println("peorDeLosCasos");
+        Scanner sc = new Scanner(System.in);
+        Carpeta padre = new Carpeta(null, "root", "hijo", "512k", TipoCarpeta.Carpeta);
+        Carpeta expResult = padre;
+        String direccion = "hijo";
+        instance.put(direccion, padre);
+        for (int i = 0; i < 2326; i++) {
+            Carpeta actual = new Carpeta(padre, "root", "hijo", "512k", TipoCarpeta.Carpeta);
+            instance.put("hijo", actual);
+            padre = actual;
+        }
+        Carpeta result = instance.get("hijo", direccion);
         assertEquals(expResult, result);
     }
 
