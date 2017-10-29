@@ -84,6 +84,7 @@ public class SistemaArchivos {
             Carpeta padre = new Carpeta(null, "", nombreRaiz, "", TipoCarpeta.Carpeta);
             tabla.put(nombreRaiz, padre);
             Carpeta ultimoAgregado = null;
+          
             while ((linea = archivo.readLine()) != null) {
                 Scanner leerLinea = new Scanner(linea);
                 if (leerLinea.hasNext()) {
