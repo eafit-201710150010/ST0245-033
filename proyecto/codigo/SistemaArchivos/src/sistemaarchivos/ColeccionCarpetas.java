@@ -1,9 +1,7 @@
-
 package sistemaarchivos;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.regex.Pattern;
 
 /**
  * Esta clase contiene la tabla de hash que permite la eficiencia de las
@@ -12,7 +10,7 @@ import java.util.regex.Pattern;
  * @author ljpalaciom
  */
 public class ColeccionCarpetas {
-    
+
     private HashMap tabla;
 
     /**
@@ -26,8 +24,9 @@ public class ColeccionCarpetas {
     /**
      * Este metodo permite ingresar un nuevo dato a la tabla de hash.
      *
-     * @param clave Esta es el nombre que se asocia con un valor de tipo carpeta o
-     * archivo, asi cuando se busque la clave se obtiene este valor rapidamente.
+     * @param clave Esta es el nombre que se asocia con un valor de tipo carpeta
+     * o archivo, asi cuando se busque la clave se obtiene este valor
+     * rapidamente.
      * @param carpeta
      */
     public void put(String clave, Carpeta carpeta) {
@@ -40,17 +39,17 @@ public class ColeccionCarpetas {
     }
 
     /**
-     * Este metodo permite obtener una lista de la tabla de hash. Retorna null
-     * si no lo encuentra.
+     * Este metodo permite obtener una lista de la tabla de hash. 
      *
      * @param clave El string que se asocia con un valor de tipo carpeta o
      * archivo.
      * @return Una LinkedList con todos las carpetas de coincidan con la clave
+     * @throws java.lang.Exception Si no se encuentra el archivo
      */
-    public LinkedList<Carpeta> get(String clave) {
+    public LinkedList<Carpeta> get(String clave) throws Exception {
         LinkedList<Carpeta> retornar = (LinkedList<Carpeta>) tabla.get(clave);
         if (retornar == null) {
-            System.out.println("No such file or directory");
+           throw new Exception("No such file or directory");
         }
         return retornar;
     }
@@ -62,8 +61,9 @@ public class ColeccionCarpetas {
      * @param clave
      * @param direccion La direccion del archivo
      * @return
+     * @throws java.lang.Exception Si no se encuentra el archivo
      */
-    public Carpeta get(String clave, String direccion) {
+    public Carpeta get(String clave, String direccion) throws Exception {
         String div[] = direccion.split("/");
 
         LinkedList<Carpeta> retornar = (LinkedList<Carpeta>) tabla.get(clave);
@@ -72,103 +72,98 @@ public class ColeccionCarpetas {
             dir.add(div[i]);
         }
         if (retornar == null) {
-            System.out.println("No such file or directory");
-        }
-        for (Carpeta carpeta : retornar) {
-            if (carpeta.getDireccion().hashCode() == dir.hashCode()) {
-                return carpeta;
+            throw new Exception("No such file or directory");
+        } 
+            for (Carpeta carpeta : retornar) {
+                if (carpeta.getDireccion().hashCode() == dir.hashCode()) {
+                    return carpeta;
+                }
             }
-        }
         return null;
     }
 
     /**
-     * Este metodo está hecho para retornar todos las rutas de una lista de
+     * Este metodo está hecho para imprimir todos las rutas de una lista de
      * carpetas
      *
-     * @param coincidencias La lista de coincidencias que se analizará
-     * @return Este metodo retorna una lista enlazada de listas de cadenas de
-     * caracteres.
+     * @param clave
+     * @throws java.lang.Exception Si no se encuentra el archivo
      */
-    public LinkedList<LinkedList<String>> direcciones(LinkedList<Carpeta> coincidencias) {
-        LinkedList<LinkedList<String>> retornar = new LinkedList<>();
+    public void direcciones(String clave) throws Exception {
+        LinkedList<Carpeta> coincidencias = get(clave);
         for (Carpeta carpeta : coincidencias) {
-            retornar.add(carpeta.getDireccion());
+            System.out.println(carpeta.getDireccion());
         }
-        return retornar;
     }
 
     /**
-     * Este metodo está hecho para retornar todos los contenidos de una lista de
-     * carpetas
+     * Este metodo está hecho para imprimir todos los contenidos de una lista de
+     * carpetas que se llaman igual
      *
-     * @param coincidencias
-     * @return Este metodo retorna una lista enlazada de listas de cadenas de
-     * caracteres.
+     * @param clave
+     * @throws java.lang.Exception Si no se encuentra el archivo
      */
-    public LinkedList<LinkedList<String>> contenidos(LinkedList<Carpeta> coincidencias) {
-        LinkedList<LinkedList<String>> retornar = new LinkedList<>();
+    public void contenidos(String clave) throws Exception {
+        LinkedList<Carpeta> coincidencias = get(clave);
         if (coincidencias != null) {
             for (Carpeta carpeta : coincidencias) {
                 if (carpeta.getTipo() == TipoCarpeta.Carpeta) {
-                    retornar.add(carpeta.listarContenido());
+                    System.out.println(carpeta.listarContenido());
                 }
             }
         }
-        return retornar;
     }
 
     /**
-     * Este metodo está hecho para retornar los contenidos de un tamaño mayor al
-     * ingresado por parámetro de una lista de carpetas
+     * Este metodo está hecho para imprimir los contenidos de un tamaño mayor al
+     * ingresado por parámetro de una lista de carpetas que se llaman igual
      *
-     * @param coincidencias
+     * @param clave
      * @param TamanoMayor
-     * @return Este metodo retorna una lista enlazada de listas de cadenas de
-     * caracteres.
+     * @throws java.lang.Exception Si no se encuentra el archivo
+     *
      */
-    public LinkedList<LinkedList<String>> contenidosMayor(LinkedList<Carpeta> coincidencias, String TamanoMayor) {
-        LinkedList<LinkedList<String>> retornar = new LinkedList<>();
+    public void contenidosMayor(String clave, String TamanoMayor) throws Exception {
+        LinkedList<Carpeta> coincidencias = get(clave);
         if (coincidencias != null) {
             for (Carpeta carpeta : coincidencias) {
                 if (carpeta.getTipo() == TipoCarpeta.Carpeta) {
-                    retornar.add(carpeta.listarContenidoMayor(TamanoMayor));
+                    System.out.println(carpeta.listarContenidoMayor(TamanoMayor));
                 }
             }
         }
-        return retornar;
     }
 
     /**
-     * Este metodo está hecho para retornar los contenidos de un usuario
-     * ingresado por parámetro de una lista de carpetas
+     * Este metodo imprime todo los contenidos de un usuario ingresado por
+     * parámetro de una lista de carpetas que se llaman igual
      *
-     * @param coincidencias Una lista enlazada de carpetas
+     * @param clave
      * @param Usuario El dueño del directorio a buscar
-     * @return Este metodo retorna una lista enlazada de listas de cadenas de
-     * caracteres.
+     * @throws java.lang.Exception Si no se encuentra el archivo
      */
-    public LinkedList<LinkedList<String>> contenidosUsuario(LinkedList<Carpeta> coincidencias, String Usuario) {
-        LinkedList<LinkedList<String>> retornar = new LinkedList<>();
+    public void contenidosUsuario(String clave, String Usuario) throws Exception {
+        LinkedList<Carpeta> coincidencias = get(clave);
         if (coincidencias != null) {
             for (Carpeta carpeta : coincidencias) {
                 if (carpeta.getTipo() == TipoCarpeta.Carpeta) {
-                    retornar.add(carpeta.listarContenidoUsuario(Usuario));
+                    System.out.println(carpeta.listarContenidoUsuario(Usuario));
                 }
             }
         }
-        return retornar;
     }
 
     /**
-     * Usa el metodo toString de la clase Carpeta con una lista de carpetas
+     * Usa el metodo toString de la clase Carpeta con una lista de carpetas que
+     * se llaman
      *
-     * @param coincidencias
+     * @param clave
+     * @throws java.lang.Exception Si no se encuentra el archivo
      */
-    public void imprimirCarpetas(LinkedList<Carpeta> coincidencias) {
+    public void imprimirCarpetas(String clave) throws Exception {
+        LinkedList<Carpeta> coincidencias = get(clave);
         for (Carpeta coincidencia : coincidencias) {
             System.out.println(coincidencia);
         }
     }
-    
 }

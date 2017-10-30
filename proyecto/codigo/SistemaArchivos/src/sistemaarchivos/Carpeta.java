@@ -52,8 +52,8 @@ public class Carpeta {
     /**
      * Este es el constructor de la clase. Usa el metodo actualizarDireccion
      *
-     * @param padre La ruta padre del archivo
-     * @param usuario
+     * @param padre La ruta padre del archivo 
+     * @param usuario El usuario del archivo
      * @param nombre Nombre del archivo
      * @param tamano Tamaño del archivo.
      * @param tipo El tipo puede ser Archivo o Carpeta segun la Enum TipoCarpeta
@@ -75,11 +75,10 @@ public class Carpeta {
     }
 
     /**
-     * Este metodo permite añadir una carpeta a LinkedList de Contenidos
-     *
+     * Este metodo permite añadir una carpeta a la LinkedList de Contenidos
      * @param carpeta
      */
-    public void add(Carpeta carpeta) {
+    private void add(Carpeta carpeta) {
         contenido.add(carpeta);
     }
 
@@ -119,9 +118,9 @@ public class Carpeta {
     }
 
     /**
-     * Este metodo permite cambiar de tipo Archivo a tipo Carpeta Es útil para
+     * Este metodo permite cambiar de tipo Archivo a tipo Carpeta. Es útil para
      * el método leerArchivo en el main, porque no se sabe el tipo de un objeto
-     * hasta que se lee el siguiente
+     * hasta que se lee el siguiente.
      */
     public void cambiarACarpeta() {
         this.tipo = TipoCarpeta.Carpeta;
@@ -137,7 +136,7 @@ public class Carpeta {
     }
 
     /**
-     * Este metodo lista todos los contenidos de una sóla carpeta.
+     * Este metodo lista todos los contenidos de una carpeta.
      *
      * @return
      */
@@ -148,11 +147,21 @@ public class Carpeta {
         }
         return hijos;
     }
-
+     /**
+      * Compara si un valor es mayor que otro
+      * @param tam1
+      * @param tam2
+      * @return 
+      */
     private static boolean auxEsMasPesado(String tam1, String tam2) {
         return Double.parseDouble(tam1) > Double.parseDouble(tam2);
     }
-
+    /**
+     *  Este es un método es un auxiliar que compara si un tamaño es mayor que otro 
+     * @param tamano
+     * @param limite
+     * @return 
+     */
     private static boolean esMasPesado(String tamano, String limite) {
         Character carp1 = tamano.charAt(tamano.length() - 1);
         Character carp2 = limite.charAt(limite.length() - 1);
@@ -163,24 +172,24 @@ public class Carpeta {
                 return false;
             }
 
-        } else if (carp1 == 'K') {
+        } else if (carp1 == 'K' || carp1 == 'k') {
             if (Character.isDigit(carp2)) {
                 return true;
-            } else if (carp2 == 'K') {
+            } else if (carp2 == 'K' || carp2 == 'k') {
                 return auxEsMasPesado(tamano.substring(0, tamano.length() - 1), limite.substring(0, limite.length() - 1));
             } else {
                 return false;
             }
-        } else if (carp1 == 'M') {
-            if (Character.isDigit(carp2) || carp2 == 'K') {
+        } else if (carp1 == 'M' || carp1 == 'm') {
+            if (Character.isDigit(carp2) || carp2 == 'K' || carp2 == 'k') {
                 return true;
-            } else if (carp2 == 'M') {
+            } else if (carp2 == 'M' || carp2 == 'm') {
                 return auxEsMasPesado(tamano.substring(0, tamano.length() - 1), limite.substring(0, limite.length() - 1));
             } else {
                 return false;
             }
         } else {
-            if (Character.isDigit(carp2) || carp2 == 'K' || carp2 == 'M') {
+            if (Character.isDigit(carp2) || carp2 == 'K' || carp2 == 'M' || carp2 == 'k' || carp2 == 'm') {
                 return true;
             } else {
                 return auxEsMasPesado(tamano.substring(0, tamano.length() - 1), limite.substring(0, limite.length() - 1));
@@ -208,7 +217,6 @@ public class Carpeta {
 
     /**
      * Este metodo permite listar contenidos por Usuario
-     *
      * @param usuario El dueño del directorio a buscar
      * @return
      */

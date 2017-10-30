@@ -6,7 +6,7 @@
 package sistemaarchivos;
 
 /**
- *
+ * Sirve para determinar si el tipo es carpeta o archivo
  * @author ljpalaciom
  */
 public enum TipoCarpeta {
