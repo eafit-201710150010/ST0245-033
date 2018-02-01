@@ -28,8 +28,8 @@ public class SistemaArchivos {
          } catch(Exception e){
          }
         System.out.println("Gracias, vuelve pronto");
-       Double promedio = probarLosTiempos();
-       System.out.println("El promedio de una busqueda de coincidencias " + promedio);
+      // Double promedio = probarLosTiempos();
+      // System.out.println("El promedio de una busqueda de coincidencias " + promedio);
     }
 
     public static void menu() throws Exception {
@@ -121,6 +121,7 @@ public class SistemaArchivos {
                     direccion = leer.readLine();
                     nombre = direccion.substring(direccion.lastIndexOf("/") + 1);
                     carpeta = tabla.get(nombre, direccion);
+                    
                     System.out.println(carpeta);
                     System.out.println();
                     break;

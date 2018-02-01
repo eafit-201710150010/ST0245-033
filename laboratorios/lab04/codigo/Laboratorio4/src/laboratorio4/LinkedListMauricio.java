@@ -88,6 +88,7 @@ public class LinkedListMauricio {
             nuevo.prev = temp;
             nuevo.next = temp.next;
             temp.next = nuevo;
+            temp.next.prev = nuevo;
         }
         size++;
     }

@@ -1,6 +1,6 @@
 package laboratorio4;
 
-// Un nodo para una lista simplemente enlazada
+// Un nodo para una lista doblemente enlazada
 public class Node {
 
     public int data;

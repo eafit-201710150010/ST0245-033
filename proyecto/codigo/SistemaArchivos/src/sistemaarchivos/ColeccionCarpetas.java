@@ -39,7 +39,7 @@ public class ColeccionCarpetas {
     }
 
     /**
-     * Este metodo permite obtener una lista de la tabla de hash. 
+     * Este metodo permite obtener una lista de la tabla de hash.
      *
      * @param clave El string que se asocia con un valor de tipo carpeta o
      * archivo.
@@ -49,7 +49,7 @@ public class ColeccionCarpetas {
     public LinkedList<Carpeta> get(String clave) throws Exception {
         LinkedList<Carpeta> retornar = (LinkedList<Carpeta>) tabla.get(clave);
         if (retornar == null) {
-           throw new Exception("No such file or directory");
+            throw new Exception("No such file or directory");
         }
         return retornar;
     }
@@ -69,17 +69,17 @@ public class ColeccionCarpetas {
         LinkedList<Carpeta> retornar = (LinkedList<Carpeta>) tabla.get(clave);
         LinkedList<String> dir = new LinkedList<>();
         for (int i = 0; i < div.length; i++) {
-            dir.add(div[i]);
+                dir.add(div[i]);
         }
         if (retornar == null) {
             throw new Exception("No such file or directory");
-        } 
-            for (Carpeta carpeta : retornar) {
-                if (carpeta.getDireccion().hashCode() == dir.hashCode()) {
-                    return carpeta;
-                }
+        }
+        for (Carpeta carpeta : retornar) {
+            if (carpeta.getDireccion().hashCode() == dir.hashCode()) {
+                return carpeta;
             }
-        return null;
+        }
+        throw new Exception("No such file or directory");
     }
 
     /**
