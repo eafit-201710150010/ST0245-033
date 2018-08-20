@@ -1,4 +1,3 @@
-package taller7;
 
 // Una lista simplemente enlazada
 public class LinkedListMauricio {

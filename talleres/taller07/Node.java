@@ -1,4 +1,3 @@
-package taller7;
 
 // Un nodo para una lista simplemente enlazada
 public class Node {
